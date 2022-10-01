@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+        .mdc-drawer {
+            border-right-color: rgba(0,0,0,.12);
+            border-right-style: solid;
+            width: 10%;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<aside class="mdc-drawer">
+    <div class="mdc-drawer__header">
+        <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/vehicle/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+                <span class="mdc-list-item__text">Vehicles</span>
+            </a>
+            <a class="mdc-list-item" href="/component/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+                <span class="mdc-list-item__text">Components</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+<div style="display: flex; flex-direction: column; width: 100%; overflow: auto">
+    <h1 style="margin: 10px;">Add Artillery</h1>
+    <form action="#" th:action="@{/vehicle/addArtillery}" th:object="${vehicle}" method="post">
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="name" th:field="*{name}" /></p>
+            <label class="mdl-textfield__label" for="name">Name</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="number" id="price" th:field="*{price}" /></p>
+            <label class="mdl-textfield__label" for="name">Price</label>
+        </div>
+
+        <select class="mdl-textfield__input" name="nationality" id="nationality">
+            <option th:each="natOpt: ${nationality}" th:value="${natOpt}"  th:text="${natOpt.getName()}"></option>
+        </select>
+
+        <span>Pasovy podvozok:&nbsp;</span>
+        <select class="mdl-textfield__input" name="pasovy" id="pasovy">
+
+            <option th:each="Opt: ${pasovy}" th:value="${Opt}"  th:text="${Opt.getValue()}"></option>
+        </select>
+
+        <span>Velke delo:&nbsp;</span>
+        <select class="mdl-textfield__input" name="delo" id="delo">
+            <option th:each="Opt: ${delo}" th:value="${Opt}"  th:text="${Opt.getValue()}"></option>
+        </select>
+
+        <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised" style="width: fit-content;"/>
+    </form>
+</div>
+</body>
+</html>
